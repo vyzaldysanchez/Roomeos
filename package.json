@@ -1,12 +1,12 @@
 {
   "name": "roomeos",
   "version": "0.0.0",
-  "description": "A starting point for Node.js express apps with TypeScript",
+  "description": "Backend for roomeos app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahat/hackathon-starter.git"
+    "url": "https://diegomicheli@bitbucket.org/lesocialcompany/roomeos-backend.git"
   },
-  "author": "Bowden Kelly",
+  "author": "Diego Michel",
   "license": "MIT",
   "scripts": {
     "start": "npm run build && npm run watch",
@@ -62,7 +62,8 @@
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-beta6",
-    "request": "^2.78.0"
+    "request": "^2.78.0",
+    "socket.io": "^2.0.3"
   },
   "devDependencies": {
     "@types/async": "^2.0.40",
