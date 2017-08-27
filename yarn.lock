@@ -33,15 +33,6 @@
   dependencies:
     "@types/express" "*"
 
-"@types/connect-mongo@0.0.32":
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/@types/connect-mongo/-/connect-mongo-0.0.32.tgz#939ca708513482c7d3f32a38c637d49d2ac7d090"
-  dependencies:
-    "@types/express" "*"
-    "@types/express-session" "*"
-    "@types/mongodb" "*"
-    "@types/mongoose" "*"
-
 "@types/dotenv@^2.0.20":
   version "2.0.22"
   resolved "https://registry.yarnpkg.com/@types/dotenv/-/dotenv-2.0.22.tgz#a825afdb92e37a777eb1a320299c0b461abaaee7"
@@ -58,13 +49,6 @@
   version "4.0.50"
   resolved "https://registry.yarnpkg.com/@types/express-serve-static-core/-/express-serve-static-core-4.0.50.tgz#c5a139b5d29d2305aae6d982f69cef36120beacf"
   dependencies:
-    "@types/node" "*"
-
-"@types/express-session@*":
-  version "1.15.3"
-  resolved "https://registry.yarnpkg.com/@types/express-session/-/express-session-1.15.3.tgz#39b6995393832284a1f368f4f1ae48acaab2aac9"
-  dependencies:
-    "@types/express" "*"
     "@types/node" "*"
 
 "@types/express-session@0.0.32":
@@ -110,7 +94,7 @@
     "@types/bson" "*"
     "@types/node" "*"
 
-"@types/mongoose@*", "@types/mongoose@^4.7.9":
+"@types/mongoose@^4.7.9":
   version "4.7.21"
   resolved "https://registry.yarnpkg.com/@types/mongoose/-/mongoose-4.7.21.tgz#aea0363e01a64c33fda5a9e592d5d25734eca3ec"
   dependencies:
