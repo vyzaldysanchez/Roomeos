@@ -1,0 +1,123 @@
+// variables
+$left-side-background: #54d4ff;
+$right-side-background: #ffa859;
+$side-padding: 50px;
+$content-with-description-padding-top: 50px;
+
+.left-container, .right-container {
+  @extend .no-padding;
+}
+
+.content-sided {
+  padding: 10px;
+  @extend .clearfix
+}
+
+.left-side, .right-side {
+  height: 600px;
+}
+
+.left-side {
+  background-color: $left-side-background;
+  padding-left: $side-padding;
+  transform-origin: right top;
+  transform: skewY(10deg);
+
+  img {
+    @extend .pull-left;
+  }
+}
+
+.right-side {
+  background-color: $right-side-background;
+  transform-origin: left top;
+  transform: skewY(10deg);
+
+  img {
+    @extend .pull-right;
+  }
+}
+
+.content-sided {
+  transform: skewY(-10deg);
+}
+
+.jumbotron {
+  background-color: transparent;
+  margin-bottom: 0;
+}
+
+.content-with-description {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding-top: $content-with-description-padding-top;
+}
+
+.landing-content-description {
+  @extend .text-center;
+  max-width: 200px;
+  font-size: 1.5em;
+}
+
+.big-landing-description {
+  min-height: 400px;
+  background-image: url("../images/landing/andrew-robles-280639.jpg");
+  background-position: 50%;
+  background-size: cover;
+
+  h3 {
+    text-align: center;
+    position: relative;
+    top: 300px;
+    color: #f88;
+    font-size: 2.2em;
+  }
+
+  &::before {
+    position: absolute;
+    right: 0;
+    left: 0;
+    display: block;
+    height: 100%;
+    content: "";
+    background: linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .9) 50%, #fff);
+  }
+}
+
+.bottom-container {
+  z-index: -100;
+  position: relative;
+  top: -140px;
+}
+
+@media screen and (min-width: $screen-xs) {
+  .img-sided {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: $screen-tablet) {
+  .left-side {
+    padding-left: 25px;
+  }
+}
+
+@media screen and (max-width: $screen-xs) {
+  .left-side, .right-side {
+    h3 {
+      text-align: center;
+    }
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .content-with-description {
+    display: block;
+    padding-top: $content-with-description-padding-top / 2;
+    .landing-content-description {
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
