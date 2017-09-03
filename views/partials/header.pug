@@ -10,9 +10,10 @@
         i.fa.fa-cube
         | Roomeos
     .collapse.navbar-collapse
-      ul.nav.navbar-nav
-        li(class=(title == 'Rooms') ? 'active' : undefined)
-          a(href='/rooms') Let's Chat
+      if user
+        ul.nav.navbar-nav
+          li(class=(title == 'Rooms') ? 'active' : undefined)
+            a(href='/rooms/discover') Let's Chat
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=(title == 'Login') ? 'active' : undefined)

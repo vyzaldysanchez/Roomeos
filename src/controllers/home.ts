@@ -9,3 +9,7 @@ export let index = (req: Request, res: Response) => {
     title: "Home"
   });
 };
+
+export default {
+  index
+};
