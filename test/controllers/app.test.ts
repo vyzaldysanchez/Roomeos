@@ -1,6 +1,6 @@
 import {} from "jest";
 import * as supertest from "supertest";
-const app = require("../src/app");
+const app = require("../../src/app");
 const request = supertest(app);
 
 describe("GET /random-url", () => {

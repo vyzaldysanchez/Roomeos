@@ -1,12 +1,12 @@
 import {} from "jest";
 import * as supertest from "supertest";
 
-const app = require("../src/app");
+const app = require("../../src/app");
 const request = supertest(app);
 
-describe("GET /", () => {
+describe("GET /contact", () => {
     it("should return 200 OK", () => {
-        return request.get("/")
+        return request.get("/contact")
             .expect(200);
     });
 });
