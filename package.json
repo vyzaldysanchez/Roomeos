@@ -40,7 +40,8 @@
     "testMatch": [
       "**/test/**/*.test.(ts|js)"
     ],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "setupTestFrameworkScriptFile": "./test/setup.ts"
   },
   "dependencies": {
     "async": "^2.1.2",
