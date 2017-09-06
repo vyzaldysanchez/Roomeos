@@ -14,7 +14,3 @@ export let index = (req: Request, res: Response) => {
     });
   }
 };
-
-export default {
-  index
-};
