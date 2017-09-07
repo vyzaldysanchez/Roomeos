@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
-import './discover.component.css';
+import './discover.component.scss';
 
-export class DiscoverRoomsComponent extends Component {
+export class DiscoverRooms extends Component {
   render() {
     return (
-      <div>
+      <div className='jumbotron new-chat-room-header'>
         <a className="btn btn-primary pull-right">Create Room</a>
       </div>
     );

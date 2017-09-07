@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import {DiscoverRoomsComponent} from './apps';
+import './index.scss';
+import {DiscoverRooms} from './apps';
 
-loadComponent('discoverRooms', <DiscoverRoomsComponent/>);
+loadComponent('discoverRooms', <DiscoverRooms/>);
 
 function loadComponent(componentName, componentInstance) {
   const componentEl = document.getElementById(componentName);
