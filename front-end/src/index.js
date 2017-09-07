@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import {DiscoverRoomsComponent} from './apps';
 
-loadComponent('discoverRooms');
+loadComponent('discoverRooms', <DiscoverRoomsComponent/>);
 
-function loadComponent(componentName) {
+function loadComponent(componentName, componentInstance) {
   const componentEl = document.getElementById(componentName);
 
   if (componentEl) {
-    ReactDOM.render(<App/>, componentEl);
+    ReactDOM.render(componentInstance, componentEl);
   }
 }
