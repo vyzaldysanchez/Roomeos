@@ -1,5 +1,8 @@
 'use strict';
 
+process.env.BABEL_ENV = 'development';
+process.env.NODE_ENV = 'development';
+
 const autoprefixer = require('autoprefixer');
 const path = require('path');
 const webpack = require('webpack');
