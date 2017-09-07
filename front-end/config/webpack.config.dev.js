@@ -140,6 +140,7 @@ module.exports = {
             options: {
               limit: 10000,
               name: 'media/[name].[hash:8].[ext]',
+              publicPath: '/app/'
             },
           },
           // Process JS with Babel.
@@ -205,10 +206,11 @@ module.exports = {
             // it's runtime that would otherwise processed through "file" loader.
             // Also exclude `html` and `json` extensions so they get processed
             // by webpacks internal loaders.
-            exclude: [/\.js$/, /\.html$/, /\.json$/],
+            exclude: [/\.js$/, /\.html$/, /\.json$/, /\.scss/],
             loader: require.resolve('file-loader'),
             options: {
               name: 'media/[name].[hash:8].[ext]',
+              publicPath: '/app/'
             },
           },
         ],
