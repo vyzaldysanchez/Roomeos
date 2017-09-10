@@ -31,6 +31,7 @@ import * as HomeController from "./controllers/home";
 import * as UserController from "./controllers/user";
 import * as ContactController from "./controllers/contact";
 import * as RoomsController from "./controllers/rooms";
+import ApiRouter from "./routes/api";
 
 /**
  * API keys and Passport configuration.
@@ -130,5 +131,7 @@ app.get("/auth/facebook", passport.authenticate("facebook", {scope: ["email", "p
 app.get("/auth/facebook/callback", passport.authenticate("facebook", {failureRedirect: "/login"}), (req, res) => {
   res.redirect(req.session.returnTo || "/");
 });
+
+app.use(ApiRouter);
 
 module.exports = app;
