@@ -1,9 +1,11 @@
 import * as passport from "passport";
 import * as passportLocal from "passport-local";
 import * as passportFacebook from "passport-facebook";
+import * as jwt from "jsonwebtoken";
+import * as HttpStatus from "http-status-codes";
 import * as _ from "lodash";
 // import { User, UserType } from '../models/User';
-import { default as User } from "../models/User";
+import { default as User, UserModel } from "../models/User";
 import { NextFunction, Request, Response } from "express";
 
 const LocalStrategy = passportLocal.Strategy;
@@ -24,7 +26,7 @@ passport.deserializeUser((id, done) => {
  * Sign in using Email and Password.
  */
 passport.use(new LocalStrategy({usernameField: "email"}, (email, password, done) => {
-  User.findOne({email: email.toLowerCase()}, (err, user: any) => {
+  User.findOne({email: email.toLowerCase()}, (err, user: UserModel) => {
     if (err) {
       return done(err);
     }
@@ -36,6 +38,8 @@ passport.use(new LocalStrategy({usernameField: "email"}, (email, password, done)
         return done(err);
       }
       if (isMatch) {
+        const payload: JwtPayload = {sub: user.id};
+        user.jwtToken = jwt.sign(payload, process.env.JWT_SECRET);
         return done(undefined, user);
       }
       return done(undefined, false, {message: "Invalid email or password."});
@@ -136,6 +140,37 @@ export let isAuthenticated = (req: Request, res: Response, next: NextFunction) =
     return next();
   }
   res.redirect("/login");
+};
+
+/**
+ * Api Login Required middleware.
+ */
+export let isApiAuthenticated = (req: Request, res: Response, next: NextFunction) => {
+  if (!req.headers.authorization) {
+    return res.status(HttpStatus.UNAUTHORIZED).end();
+  }
+
+  // get the last part from a authorization header string like "bearer token-value"
+  const token = req.headers.authorization.split(" ")[1];
+
+  // decode the token using a secret key-phrase
+  return jwt.verify(token, process.env.JWT_SECRET, (err: any, decoded: JwtPayload) => {
+
+    if (err) {
+      return res.status(HttpStatus.UNAUTHORIZED).end();
+    }
+
+    const userId = decoded.sub;
+
+    // check if a user exists
+    return User.findById(userId, (userErr, user) => {
+      if (userErr || !user) {
+        return res.status(HttpStatus.UNAUTHORIZED).end();
+      }
+
+      return next();
+    });
+  });
 };
 
 /**

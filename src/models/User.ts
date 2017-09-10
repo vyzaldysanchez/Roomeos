@@ -10,6 +10,7 @@ export type UserModel = mongoose.Document & {
 
   facebook: string,
   tokens: AuthToken[],
+  jwtToken: string,
 
   profile: {
     name: string,
@@ -19,7 +20,7 @@ export type UserModel = mongoose.Document & {
     picture: string
   },
 
-  comparePassword: (candidatePassword: string, cb: (err: any, isMatch: any) => {}) => void,
+  comparePassword: (candidatePassword: string, cb: (err: any, isMatch: any) => any) => void,
   gravatar: (size: number) => string
 };
 
