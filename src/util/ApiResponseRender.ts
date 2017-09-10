@@ -7,13 +7,14 @@ export class ApiResponseRender {
   }
 
   render(payload: any) {
-    this.response.setHeader("Content-Type", "application/json");
-    this.response.send(JSON.stringify(payload));
+    this.response
+      .header("Content-Type", "application/json")
+      .json(payload);
   }
 
   renderValidationError(payload: any) {
-    this.response.status(HttpStatus.BAD_REQUEST);
-    this.response.setHeader("Content-Type", "application/json");
-    this.response.send(JSON.stringify(payload));
+    this.response.status(HttpStatus.BAD_REQUEST)
+      .header("Content-Type", "application/json")
+      .json(payload);
   }
 }
