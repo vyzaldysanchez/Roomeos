@@ -132,6 +132,6 @@ app.get("/auth/facebook/callback", passport.authenticate("facebook", {failureRed
   res.redirect(req.session.returnTo || "/");
 });
 
-app.use(ApiRouter);
+app.use("/api", ApiRouter);
 
 module.exports = app;
