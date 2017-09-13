@@ -4,9 +4,6 @@ import * as jwt from "jsonwebtoken";
 
 const router = Router();
 
-/**
- * OAuth authentication routes. (Sign in)
- */
 router.get("/facebook", passport.authenticate("facebook", {scope: ["email", "public_profile"]}));
 router.get("/facebook/callback", passport.authenticate("facebook", {failureRedirect: "/login"}), (req, res) => {
   const payload: JwtPayload = {sub: req.user.id};
@@ -14,6 +11,5 @@ router.get("/facebook/callback", passport.authenticate("facebook", {failureRedir
   res.cookie("jwt", jwtToken, {expires: false});
   res.redirect(req.session.returnTo || "/");
 });
-
 
 export default router;

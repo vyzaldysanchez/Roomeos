@@ -125,9 +125,6 @@ app.get("/account/unlink/:provider", passportConfig.isAuthenticated, UserControl
 app.get("/rooms", passportConfig.isAuthenticated, RoomsController.getMyRooms);
 app.get("/rooms/discover", passportConfig.isAuthenticated, RoomsController.discoverRooms);
 
-/**
- * OAuth authentication routes. (Sign in)
- */
 app.use("/auth", AuthProvidersRouter);
 
 app.use("/api", ApiRouter);
