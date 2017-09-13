@@ -32,6 +32,7 @@ import * as UserController from "./controllers/user";
 import * as ContactController from "./controllers/contact";
 import * as RoomsController from "./controllers/rooms";
 import ApiRouter from "./routes/api";
+import AuthProvidersRouter from "./routes/auth-providers";
 
 /**
  * API keys and Passport configuration.
@@ -127,10 +128,7 @@ app.get("/rooms/discover", passportConfig.isAuthenticated, RoomsController.disco
 /**
  * OAuth authentication routes. (Sign in)
  */
-app.get("/auth/facebook", passport.authenticate("facebook", {scope: ["email", "public_profile"]}));
-app.get("/auth/facebook/callback", passport.authenticate("facebook", {failureRedirect: "/login"}), (req, res) => {
-  res.redirect(req.session.returnTo || "/");
-});
+app.use("/auth", AuthProvidersRouter);
 
 app.use("/api", ApiRouter);
 
