@@ -22,7 +22,8 @@ export let postCreateRoom = (req: Request, res: Response) => {
       visibility: doc.visibility,
       category: doc.category,
       location: doc.location,
-      maxChatters: doc.maxChatters
+      maxChatters: doc.maxChatters,
+      createdBy: doc.createdBy
     });
   }).catch(error => {
     responseRender.renderValidationError(error);

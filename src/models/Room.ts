@@ -15,7 +15,8 @@ export type RoomModel = Document & {
   location: string,
   maxChatters: number,
   messages: RoomMessageModel[],
-  registerChatters: Chatter[]
+  registerChatters: Chatter[],
+  createdBy: Chatter
 };
 
 const roomSchema = new Schema({
@@ -34,7 +35,8 @@ const roomSchema = new Schema({
     max: MAX_NUMBER_OF_CHATTERS
   },
   messages: [{type: Schema.Types.ObjectId, ref: "RoomMessage"}],
-  registerChatters: [{type: Schema.Types.ObjectId, ref: "User"}]
+  registerChatters: [{type: Schema.Types.ObjectId, ref: "User"}],
+  createdBy: {type: Schema.Types.ObjectId, ref: "User", required: true}
 }, {timestamps: true});
 
 const Room = model("Room", roomSchema);
