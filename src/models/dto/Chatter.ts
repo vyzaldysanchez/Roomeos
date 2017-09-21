@@ -1,5 +1,5 @@
 export type Chatter = {
-  id: string,
+  _id: string,
   name: string,
   email: string,
   gender: string,

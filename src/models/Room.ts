@@ -1,6 +1,6 @@
+import { UserModel } from "./User";
 import { Document, model, Schema } from "mongoose";
 import { RoomMessageModel } from "./RoomMessage";
-import { Chatter } from "./dto/Chatter";
 
 export const MAX_NUMBER_OF_CHATTERS = 250;
 
@@ -15,8 +15,8 @@ export type RoomModel = Document & {
   location: string,
   maxChatters: number,
   messages: RoomMessageModel[],
-  registerChatters: Chatter[],
-  createdBy: Chatter
+  registerChatters: UserModel[],
+  createdBy: UserModel
 };
 
 const roomSchema = new Schema({
