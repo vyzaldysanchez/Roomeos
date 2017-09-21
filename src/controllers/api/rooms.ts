@@ -30,3 +30,33 @@ export let postCreateRoom = (req: Request, res: Response) => {
   });
 
 };
+
+/**
+ * GET /users/:userId/rooms
+ */
+export let getMyRooms = (req: Request, res: Response) => {
+
+  const responseRender = new ApiResponseRender(res);
+  const createdBy = req.params.userId;
+
+  Room.find({ createdBy }).populate("createdBy", "profile").then(myRooms => {
+    responseRender.render(myRooms.map((myRoom: RoomModel) => {
+      const createdByUser = myRoom.createdBy;
+      return {
+        ...myRoom.toObject(),
+        createdBy: {
+          _id: createdByUser.id,
+          name: createdByUser.profile.name,
+          location: createdByUser.profile.location,
+          email: createdByUser.email,
+          gender: createdByUser.profile.gender,
+          picture: createdByUser.profile.picture,
+          website: createdByUser.profile.website
+        }
+      };
+    }));
+  }).catch(error => {
+    responseRender.renderValidationError(error);
+  });
+
+};
