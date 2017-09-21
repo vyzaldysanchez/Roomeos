@@ -122,8 +122,8 @@ app.post("/account/password", passportConfig.isAuthenticated, UserController.pos
 app.post("/account/delete", passportConfig.isAuthenticated, UserController.postDeleteAccount);
 app.get("/account/unlink/:provider", passportConfig.isAuthenticated, UserController.getOauthUnlink);
 
-app.get("/rooms", passportConfig.isAuthenticated, RoomsController.getMyRooms);
 app.get("/rooms/discover", passportConfig.isAuthenticated, RoomsController.discoverRooms);
+app.get(["/rooms", "/rooms/*"], passportConfig.isAuthenticated, RoomsController.getMyRooms);
 
 app.use("/auth", AuthProvidersRouter);
 
