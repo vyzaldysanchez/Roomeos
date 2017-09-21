@@ -12,7 +12,9 @@
     .collapse.navbar-collapse
       if user
         ul.nav.navbar-nav
-          li(class=(title == 'Rooms') ? 'active' : undefined)
+          li(class=(title == 'My Rooms') ? 'active' : undefined)
+            a(href='/rooms') My Rooms
+          li(class=(title == 'Discover rooms') ? 'active' : undefined)
             a(href='/rooms/discover') Let's Chat
       ul.nav.navbar-nav.navbar-right
         if !user
