@@ -24,7 +24,7 @@ export function loadMyRooms(userId: String): Function {
   return function (dispatch: Function, getState: Function) {
     return roomsService.loadMyRooms(userId)
       .then(myRooms => dispatch({
-        type: ADD_ROOM,
+        type: LOAD_MY_ROOMS,
         myRooms
       }))
       .catch((error) => console.warn("Error in loadMyRooms: ", error))

@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { User } from "../../models";
 import "./guard.component.scss";
+import { connect } from "react-redux";
 
-export class Guard extends Component {
+class Guard extends Component {
 
   static propTypes = {
     children: PropTypes.element.isRequired,
@@ -26,3 +27,11 @@ export class Guard extends Component {
   }
 
 }
+
+const mapStateToProps = ({account}) => {
+  return {
+    user: account.user
+  };
+};
+
+export default connect(mapStateToProps)(Guard);

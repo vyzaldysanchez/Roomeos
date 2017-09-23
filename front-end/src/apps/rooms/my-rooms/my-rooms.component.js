@@ -10,6 +10,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import ImmutablePropTypes from "react-immutable-proptypes";
 import PropTypes from "prop-types";
 import { ChatRoom, User } from "../../../models";
+import { loadMyRooms } from "../../../redux";
 
 class MyRooms extends Component {
 
@@ -18,17 +19,19 @@ class MyRooms extends Component {
     user: PropTypes.shape(User)
   };
 
+  componentDidMount() {
+    this.props.dispatch(loadMyRooms(this.props.user._id));
+  }
+
   render() {
     return (
-      <Guard user={this.props.user}>
-        <Router>
-          <Switch>
-            <Route exact path="/rooms" component={this.renderMainContent.bind(this)}/>
-            <Route path="/rooms/new-room" component={NewRoom}/>
-            <Route component={NoMatch}/>
-          </Switch>
-        </Router>
-      </Guard>
+      <Router>
+        <Switch>
+          <Route exact path="/rooms" component={this.renderMainContent.bind(this)}/>
+          <Route path="/rooms/new-room" component={NewRoom}/>
+          <Route component={NoMatch}/>
+        </Switch>
+      </Router>
     )
   }
 

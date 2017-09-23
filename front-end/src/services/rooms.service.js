@@ -18,7 +18,7 @@ export async function createRoom(newRoom: ChatRoom): Promise<ChatRoom> {
 
 export async function loadMyRooms(userId: String): Promise<ChatRoom[]> {
   try {
-    const response = await fetch(API_ROOT + "/rooms", {
+    const response = await fetch(API_ROOT + `/users/${userId}/rooms`, {
       headers: {...DEFAULT_HEADERS, ...getAuthorizationHeader()},
       method: "GET"
     });
