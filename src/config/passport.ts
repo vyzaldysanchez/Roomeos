@@ -4,8 +4,7 @@ import * as passportFacebook from "passport-facebook";
 import * as jwt from "jsonwebtoken";
 import * as HttpStatus from "http-status-codes";
 import * as _ from "lodash";
-// import { User, UserType } from '../models/User';
-import { default as User, UserModel } from "../models/User";
+import User, { UserModel } from "../models/User";
 import { NextFunction, Request, Response } from "express";
 
 const LocalStrategy = passportLocal.Strategy;
