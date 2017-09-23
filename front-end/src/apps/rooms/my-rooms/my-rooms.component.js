@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./my-rooms.component.scss";
 import {
   HeaderImageContainer, NewRoom,
-  NoMatch, RoomsList, Guard
+  NoMatch, RoomsList
 } from "../../../components";
 import peopleChatting from "../../../images/people-chatting.jpg";
 import { connect } from "react-redux";
