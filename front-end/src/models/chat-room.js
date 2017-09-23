@@ -1,7 +1,8 @@
-import {Chatter} from './chatter';
-import {RoomMessage} from './room-message';
+import { Chatter } from "./chatter";
+import { RoomMessage } from "./room-message";
 
 export interface ChatRoom {
+  _id: String;
   name: String;
   roomIcon: String;
   roomHeaderImage: String;
@@ -10,5 +11,5 @@ export interface ChatRoom {
   location: String;
   maxChatters: Number;
   messages: RoomMessage[];
-  registerChatters: Chatter[]
+  registerChatters: Chatter[];
 }

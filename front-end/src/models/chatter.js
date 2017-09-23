@@ -1,5 +1,5 @@
 export interface Chatter {
-  id: String;
+  _id: String;
   name: String;
   email: String;
   gender: String;
