@@ -1,21 +1,18 @@
 import React, { Component } from "react";
 import "./my-rooms.component.scss";
-import {
-  HeaderImageContainer, NewRoom,
-  NoMatch, RoomsList
-} from "../../../components";
+import { HeaderImageContainer, NewRoom, NoMatch, RoomsList } from "../../../components";
 import peopleChatting from "../../../images/people-chatting.jpg";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import ImmutablePropTypes from "react-immutable-proptypes";
 import PropTypes from "prop-types";
-import { ChatRoom, User } from "../../../models";
+import { User } from "../../../models";
 import { loadMyRooms } from "../../../redux";
 
 class MyRooms extends Component {
 
   static propTypes = {
-    myRooms: ImmutablePropTypes.listOf(ImmutablePropTypes.shape(ChatRoom)).isRequired,
+    myRooms: ImmutablePropTypes.list.isRequired,
     user: PropTypes.shape(User)
   };
 
@@ -44,7 +41,7 @@ class MyRooms extends Component {
             <Link to="/rooms/new-room" className="btn btn-primary pull-right">Create Room</Link>
           </div>
         </HeaderImageContainer>
-        <RoomsList rooms={this.props.myRooms}/>
+        <RoomsList title="Rooms you have joined or created" className="rooms-list" rooms={this.props.myRooms}/>
       </div>
     )
   }

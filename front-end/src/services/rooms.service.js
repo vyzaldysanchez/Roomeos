@@ -1,5 +1,6 @@
 import { API_ROOT, DEFAULT_HEADERS, getAuthorizationHeader } from "./index";
 import type { ChatRoom } from "../models/chat-room";
+import { List } from "immutable";
 
 export async function createRoom(newRoom: ChatRoom): Promise<ChatRoom> {
   try {
@@ -16,14 +17,14 @@ export async function createRoom(newRoom: ChatRoom): Promise<ChatRoom> {
   }
 }
 
-export async function loadMyRooms(userId: String): Promise<ChatRoom[]> {
+export async function loadMyRooms(userId: String): Promise<List<ChatRoom>> {
   try {
     const response = await fetch(API_ROOT + `/users/${userId}/rooms`, {
       headers: {...DEFAULT_HEADERS, ...getAuthorizationHeader()},
       method: "GET"
     });
-    const createdRoom = await response.json();
-    return Promise.resolve(createdRoom);
+    const roomsList = await response.json();
+    return Promise.resolve(List(roomsList));
   }
   catch (error) {
     return Promise.reject(error);
