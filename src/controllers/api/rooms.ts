@@ -15,8 +15,9 @@ export let postCreateRoom = (req: Request, res: Response) => {
 
   newRoom.save().then(doc => {
     responseRender.render({
-      id: doc.id,
+      _id: doc.id,
       name: doc.name,
+      description: doc.description,
       roomIcon: doc.roomIcon,
       roomHeaderImage: doc.roomHeaderImage,
       visibility: doc.visibility,
@@ -39,7 +40,7 @@ export let getMyRooms = (req: Request, res: Response) => {
   const responseRender = new ApiResponseRender(res);
   const createdBy = req.params.userId;
 
-  Room.find({ createdBy }).populate("createdBy", "profile").then(myRooms => {
+  Room.find({createdBy}).populate("createdBy", "profile").then(myRooms => {
     responseRender.render(myRooms.map((myRoom: RoomModel) => {
       const createdByUser = myRoom.createdBy;
       return {

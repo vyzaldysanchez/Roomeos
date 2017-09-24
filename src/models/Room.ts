@@ -8,6 +8,7 @@ export type RoomVisibilityModel = "public" | "private";
 
 export type RoomModel = Document & {
   name: string,
+  description: string,
   roomIcon: string,
   roomHeaderImage: string,
   visibility: RoomVisibilityModel,
@@ -24,6 +25,7 @@ const roomSchema = new Schema({
     type: String,
     required: true
   },
+  description: String,
   visibility: {
     type: String,
     enum: ["public", "private"]
