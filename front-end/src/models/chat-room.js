@@ -4,6 +4,7 @@ import { RoomMessage } from "./room-message";
 export interface ChatRoom {
   _id: String;
   name: String;
+  description: String;
   roomIcon: String;
   roomHeaderImage: String;
   visibility: String;
@@ -12,4 +13,5 @@ export interface ChatRoom {
   maxChatters: Number;
   messages: RoomMessage[];
   registerChatters: Chatter[];
+  createdBy: Chatter;
 }
