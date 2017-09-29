@@ -1,0 +1,18 @@
+@import "../../../styles/variables";
+
+.rooms-list {
+  padding: 8px;
+  min-height: 350px;
+
+  .rooms-list-header {
+    h3 {
+      font-size: 30px;
+      color: $basic-text-header-color;
+    }
+  }
+
+  .rooms-list-col {
+    margin-top: 10px;
+  }
+
+}

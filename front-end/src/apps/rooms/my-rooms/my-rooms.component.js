@@ -41,7 +41,7 @@ class MyRooms extends Component {
             <Link to="/rooms/new-room" className="btn btn-primary pull-right">Create Room</Link>
           </div>
         </HeaderImageContainer>
-        <RoomsList title="Rooms you have joined or created" className="rooms-list" rooms={this.props.myRooms}/>
+        <RoomsList user={this.props.user} title="Rooms you have joined or created" className="rooms-list" rooms={this.props.myRooms}/>
       </div>
     )
   }

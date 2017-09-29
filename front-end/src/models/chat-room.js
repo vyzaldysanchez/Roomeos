@@ -13,5 +13,6 @@ export interface ChatRoom {
   maxChatters: Number;
   messages: RoomMessage[];
   registerChatters: Chatter[];
+  tags: String[],
   createdBy: Chatter;
 }
