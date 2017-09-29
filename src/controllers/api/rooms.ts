@@ -24,6 +24,7 @@ export let postCreateRoom = (req: Request, res: Response) => {
       category: doc.category,
       location: doc.location,
       maxChatters: doc.maxChatters,
+      tags: doc.tags,
       createdBy: doc.createdBy
     });
   }).catch(error => {
