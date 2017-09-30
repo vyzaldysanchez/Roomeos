@@ -39,9 +39,13 @@ const roomSchema = new Schema({
   },
   messages: [{type: Schema.Types.ObjectId, ref: "RoomMessage"}],
   registerChatters: [{type: Schema.Types.ObjectId, ref: "User"}],
-  tags: [String],
+  tags: {type: [String], validate: [tagsLimit, "{PATH} exceeds the limit of 3"]},
   createdBy: {type: Schema.Types.ObjectId, ref: "User", required: true}
 }, {timestamps: true});
+
+function tagsLimit(tags: String[]) {
+  return tags.length <= 3;
+}
 
 const Room = model("Room", roomSchema);
 
