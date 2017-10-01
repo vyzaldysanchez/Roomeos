@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./my-rooms.component.scss";
-import { HeaderImageContainer, NewRoom, NoMatch, RoomsList } from "../../../components";
+import { HeaderImageContainer, NewRoom, NoMatch, RoomsList, FloatingButton } from "../../../components";
 import peopleChatting from "../../../images/people-chatting.jpg";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
@@ -38,10 +38,13 @@ class MyRooms extends Component {
         <HeaderImageContainer backgroundImage={peopleChatting}>
           <div className='new-chat-room-header'>
             <h3>Start a new chat room and enjoy a good conversation</h3>
-            <Link to="/rooms/new-room" className="btn btn-primary pull-right">Create Room</Link>
           </div>
         </HeaderImageContainer>
-        <RoomsList user={this.props.user} title="Rooms you have joined or created" className="rooms-list" rooms={this.props.myRooms}/>
+        <RoomsList user={this.props.user} title="Rooms you have joined or created" className="rooms-list"
+                   rooms={this.props.myRooms}/>
+        <Link to="/rooms/new-room">
+          <FloatingButton icon="fa fa-plus"/>
+        </Link>
       </div>
     )
   }
