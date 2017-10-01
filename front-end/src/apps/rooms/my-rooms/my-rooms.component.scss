@@ -1,5 +1,13 @@
 .new-chat-room-header {
-
+ p {
+   font-size: 1.4em;
+   color: white;
+   text-shadow: 1px 2px 3px rgba(0, 0, 0, 0.8);
+   float: right;
+   padding-right: 25px;
+   position: relative;
+   top: 15px;
+ }
 }
 
 .my-rooms-container {

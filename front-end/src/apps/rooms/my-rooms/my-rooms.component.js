@@ -38,6 +38,7 @@ class MyRooms extends Component {
         <HeaderImageContainer backgroundImage={peopleChatting}>
           <div className='new-chat-room-header'>
             <h3>Start a new chat room and enjoy a good conversation</h3>
+            <p>keeping in touch with friends, classmates, neighbors or even <strong>strangers</strong> have never been easier</p>
           </div>
         </HeaderImageContainer>
         <RoomsList user={this.props.user} title="Rooms you have joined or created" className="rooms-list"
