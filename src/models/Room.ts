@@ -24,9 +24,14 @@ export type RoomModel = Document & {
 const roomSchema = new Schema({
   name: {
     type: String,
-    required: true
+    required: true,
+    minlength: 3,
+    maxlength: 75
   },
-  description: String,
+  description: {
+    type: String,
+    maxlength: 140
+  },
   visibility: {
     type: String,
     enum: ["public", "private"]
