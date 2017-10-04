@@ -21,11 +21,11 @@ export class RoomsList extends Component {
         </div>
         <div className="row">
           {this.props.rooms.map((room, index) => {
-            return (
+            return room ? (
               <div key={index} className="rooms-list-col col-md-3">
                 <RoomCard user={this.props.user} room={room}/>
               </div>
-            )
+            ) : null
           })}
         </div>
       </div>
