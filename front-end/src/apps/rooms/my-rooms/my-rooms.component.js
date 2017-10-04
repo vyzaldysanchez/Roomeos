@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./my-rooms.component.scss";
-import { HeaderImageContainer, NewRoom, NoMatch, RoomsList, FloatingButton } from "../../../components";
+import { FloatingButton, HeaderImageContainer, NoMatch, RoomsList } from "../../../components";
+import NewRoom from "../../../components/rooms/new/new-room.component";
 import peopleChatting from "../../../images/people-chatting.jpg";
 import { connect } from "react-redux";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
@@ -10,15 +11,6 @@ import { User } from "../../../models";
 import { loadMyRooms } from "../../../redux";
 
 class MyRooms extends Component {
-
-  static propTypes = {
-    myRooms: ImmutablePropTypes.list.isRequired,
-    user: PropTypes.shape(User)
-  };
-
-  componentDidMount() {
-    this.props.dispatch(loadMyRooms(this.props.user._id));
-  }
 
   render() {
     return (
@@ -33,12 +25,30 @@ class MyRooms extends Component {
   }
 
   renderMainContent() {
+    return <MyRoomsMainContent {...this.props}/>
+  }
+
+}
+
+class MyRoomsMainContentComponent extends Component {
+
+  static propTypes = {
+    myRooms: ImmutablePropTypes.list.isRequired,
+    user: PropTypes.shape(User)
+  };
+
+  componentDidMount() {
+    this.props.dispatch(loadMyRooms(this.props.user._id));
+  }
+
+  render() {
     return (
       <div className="my-rooms-container">
         <HeaderImageContainer backgroundImage={peopleChatting}>
           <div className='new-chat-room-header'>
             <h3>Start a new chat room and enjoy a good conversation</h3>
-            <p>keeping in touch with friends, classmates, neighbors or even <strong>strangers</strong> have never been easier</p>
+            <p>keeping in touch with friends, classmates, neighbors or even <strong>strangers</strong> have never been
+              easier</p>
           </div>
         </HeaderImageContainer>
         <RoomsList user={this.props.user} title="Rooms you have joined or created" className="rooms-list"
@@ -59,4 +69,6 @@ const mapStateToProps = ({rooms, account}) => {
   };
 };
 
-export default connect(mapStateToProps)(MyRooms);
+const MyRoomsMainContent = connect(mapStateToProps)(MyRoomsMainContentComponent);
+
+export default MyRooms;
