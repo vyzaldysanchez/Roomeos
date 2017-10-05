@@ -1,13 +1,15 @@
 import React, { Component } from "react";
-import "./new-room.component.scss";
+import ToggleButton from "react-toggle-button"
+import { connect } from "react-redux";
+import { WithContext as ReactTags } from "react-tag-input";
+import PropTypes from "prop-types";
+import { Map } from "immutable";
 import type { ChatRoom } from "../../../models/chat-room";
 import { addRoom } from "../../../redux";
-import ToggleButton from "react-toggle-button"
-import { WithContext as ReactTags } from "react-tag-input";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { User } from "../../../models/user";
 import { Link } from "react-router-dom";
+import { minLength, required, ruleRunner, run, TextField } from "../../validations";
+import "./new-room.component.scss";
 
 const tagsMessage = "Add keywords that help other people find your room";
 
@@ -19,12 +21,18 @@ const initialRoomState: ChatRoom = {
 };
 
 const initialState = {
-  newRoom: initialRoomState,
+  newRoom: Map(initialRoomState),
   isPrivate: false,
   suggestions: ["friends", "classmates", "college", "university"],
   tags: [{id: 1, text: "friends"}],
-  finishCreating: false
+  finishCreating: false,
+  showErrors: false,
+  validationErrors: {},
 };
+
+const fieldValidations = [
+  ruleRunner("name", "Room Name", required, minLength(3)),
+];
 
 class NewRoom extends Component {
 
@@ -41,8 +49,15 @@ class NewRoom extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  render() {
+  componentWillMount() {
+    this.setState({validationErrors: run(this.state.newRoom, fieldValidations)});
+  }
 
+  errorFor(field) {
+    return this.state.validationErrors[field] || "";
+  }
+
+  render() {
     return (
       <div className="container">
         {this.state.finishCreating ? this.renderResumePanel() : this.renderForm()}
@@ -51,14 +66,14 @@ class NewRoom extends Component {
   }
 
   renderResumePanel() {
-    const newRoom: ChatRoom = this.state.newRoom;
+    const newRoom = this.state.newRoom;
 
     return (
       <div className="resume-panel col-md-6 col-md-offset-3">
-        <h3>Congrats!, you just created a new room called <strong>{newRoom.name}</strong></h3>
+        <h3>Congrats!, you just created a new room called <strong>{newRoom.get("name")}</strong></h3>
         <div className="col-md-12 m-top clearfix">
           <div className="col-md-6 col-sm-6 col-xs-6">
-            <Link to={`/rooms/${newRoom._id}`} className="btn btn-success btn-block">Join chat</Link>
+            <Link to={`/rooms/${newRoom.get("_id")}`} className="btn btn-success btn-block">Join chat</Link>
           </div>
           <div className="col-md-6 col-sm-6 col-xs-6">
             <Link to="/rooms" className="btn btn-primary btn-block">Go to my rooms</Link>
@@ -70,6 +85,7 @@ class NewRoom extends Component {
 
   renderForm() {
     const {suggestions, tags} = this.state;
+    const newRoom: Map = this.state.newRoom;
 
     return (
       <div className="form-container col-md-6 col-md-offset-3">
@@ -77,14 +93,16 @@ class NewRoom extends Component {
         <form className="new-room-form" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name*</label>
-            <input required id="name" value={this.state.newRoom.name} onChange={this.handleChange}
-                   placeholder="Name by which your room can be found"
-                   className="form-control"
-                   type="text"/>
+            <TextField required id="name" value={newRoom.get("name")} onChange={this.handleChange}
+                       placeholder="Name by which your room can be found"
+                       inputClassName="form-control"
+                       errorText={this.errorFor("name")}
+                       autoComplete="off"
+                       type="text" showError={this.state.showErrors}/>
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>
-            <textarea id="description" value={this.state.newRoom.description} onChange={this.handleChange}
+            <textarea id="description" value={newRoom.get("description")} onChange={this.handleChange}
                       placeholder="Explain what is the room about..."
                       className="form-control"/>
           </div>
@@ -128,9 +146,9 @@ class NewRoom extends Component {
   }
 
   handleChange(event: Event) {
-    const newRoom = Object.assign({}, this.state.newRoom);
-    newRoom[event.target.id] = event.target.value;
-    this.setState({newRoom});
+    const newRoom = this.state.newRoom.set(event.target.id, event.target.value);
+    const validationErrors = run(newRoom, fieldValidations);
+    this.setState({newRoom, validationErrors});
   }
 
   handleDelete(i: Number) {
@@ -145,18 +163,23 @@ class NewRoom extends Component {
   }
 
   handleSubmit(event: Event) {
-    const newRoom: ChatRoom = {
-      ...this.state.newRoom,
+    event.preventDefault();
+
+    const newRoom: ChatRoom = this.state.newRoom.merge({
       visibility: this.getVisibility(),
       tags: this.getTags(),
       createdBy: this.props.user._id
-    };
+    }).toObject();
 
-    this.props.dispatch(addRoom(newRoom)).then(({createdRoom}) => {
-      this.setState({newRoom: createdRoom, finishCreating: true});
-    });
+    if (Object.keys(this.state.validationErrors).length === 0) {
+      this.props.dispatch(addRoom(newRoom)).then(({createdRoom}) => {
+        this.setState({newRoom: Map(createdRoom), finishCreating: true});
+      });
+    }
+    else {
+      this.setState({showErrors: true});
+    }
 
-    event.preventDefault();
   }
 
   getVisibility(): String {
