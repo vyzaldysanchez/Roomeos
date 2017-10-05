@@ -12,11 +12,16 @@ import { loadMyRooms } from "../../../redux";
 
 class MyRooms extends Component {
 
+  constructor(props) {
+    super(props);
+    this.renderMainContent = this.renderMainContent.bind(this);
+  }
+
   render() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/rooms" component={this.renderMainContent.bind(this)}/>
+          <Route exact path="/rooms" component={this.renderMainContent}/>
           <Route path="/rooms/new-room" component={NewRoom}/>
           <Route component={NoMatch}/>
         </Switch>
@@ -25,12 +30,26 @@ class MyRooms extends Component {
   }
 
   renderMainContent() {
-    return <MyRoomsMainContent {...this.props}/>
+    return (
+      <div className="my-rooms-container">
+        <HeaderImageContainer backgroundImage={peopleChatting}>
+          <div className='new-chat-room-header'>
+            <h3>Start a new chat room and enjoy a good conversation</h3>
+            <p>keeping in touch with friends, classmates, neighbors or even <strong>strangers</strong> have never been
+              easier</p>
+          </div>
+        </HeaderImageContainer>
+        <MyRoomsList/>
+        <Link to="/rooms/new-room">
+          <FloatingButton icon="fa fa-plus"/>
+        </Link>
+      </div>
+    )
   }
 
 }
 
-class MyRoomsMainContentComponent extends Component {
+class MyRoomsListComponent extends Component {
 
   static propTypes = {
     myRooms: ImmutablePropTypes.list.isRequired,
@@ -42,22 +61,8 @@ class MyRoomsMainContentComponent extends Component {
   }
 
   render() {
-    return (
-      <div className="my-rooms-container">
-        <HeaderImageContainer backgroundImage={peopleChatting}>
-          <div className='new-chat-room-header'>
-            <h3>Start a new chat room and enjoy a good conversation</h3>
-            <p>keeping in touch with friends, classmates, neighbors or even <strong>strangers</strong> have never been
-              easier</p>
-          </div>
-        </HeaderImageContainer>
-        <RoomsList user={this.props.user} title="Rooms you have joined or created" className="rooms-list"
-                   rooms={this.props.myRooms}/>
-        <Link to="/rooms/new-room">
-          <FloatingButton icon="fa fa-plus"/>
-        </Link>
-      </div>
-    )
+    return <RoomsList user={this.props.user} title="Rooms you have joined or created" className="rooms-list"
+                      rooms={this.props.myRooms}/>
   }
 
 }
@@ -69,6 +74,6 @@ const mapStateToProps = ({rooms, account}) => {
   };
 };
 
-const MyRoomsMainContent = connect(mapStateToProps)(MyRoomsMainContentComponent);
+const MyRoomsList = connect(mapStateToProps)(MyRoomsListComponent);
 
 export default MyRooms;
