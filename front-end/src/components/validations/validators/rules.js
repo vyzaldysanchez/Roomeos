@@ -19,3 +19,9 @@ export const minLength = (length: Number) => {
     return text.length >= length ? null : ErrorMessages.minLength(length);
   };
 };
+
+export const maxLength = (length: Number) => {
+  return (text) => {
+    return text.length <= length ? null : ErrorMessages.maxLength(length);
+  };
+};

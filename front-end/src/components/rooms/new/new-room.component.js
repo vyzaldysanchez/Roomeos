@@ -8,7 +8,7 @@ import type { ChatRoom } from "../../../models/chat-room";
 import { addRoom } from "../../../redux";
 import { User } from "../../../models/user";
 import { Link } from "react-router-dom";
-import { minLength, required, ruleRunner, run, TextField } from "../../validations";
+import { minLength, maxLength, required, ruleRunner, run, TextField, TextArea } from "../../validations";
 import "./new-room.component.scss";
 
 const tagsMessage = "Add keywords that help other people find your room";
@@ -32,6 +32,7 @@ const initialState = {
 
 const fieldValidations = [
   ruleRunner("name", "Room name", required, minLength(3)),
+  ruleRunner("description", "Room description", maxLength(140)),
 ];
 
 class NewRoom extends Component {
@@ -93,7 +94,7 @@ class NewRoom extends Component {
         <form className="new-room-form" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Name*</label>
-            <TextField required id="name" value={newRoom.get("name")} onChange={this.handleChange}
+            <TextField id="name" value={newRoom.get("name")} onChange={this.handleChange}
                        placeholder="Name by which your room can be found"
                        inputClassName="form-control"
                        errorText={this.errorFor("name")}
@@ -102,9 +103,12 @@ class NewRoom extends Component {
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>
-            <textarea id="description" value={newRoom.get("description")} onChange={this.handleChange}
+            <TextArea id="description" value={newRoom.get("description")} onChange={this.handleChange}
                       placeholder="Explain what is the room about..."
-                      className="form-control"/>
+                      inputClassName="form-control"
+                      errorText={this.errorFor("description")}
+                      showError={this.state.showErrors}
+            />
           </div>
           <div className="form-group">
             <label htmlFor="tags">Tags (3 max)</label>
