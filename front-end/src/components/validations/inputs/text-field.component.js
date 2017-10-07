@@ -22,7 +22,7 @@ export class TextField extends React.Component {
                autoComplete={this.props.autoComplete}/>
         <OptionallyDisplayed display={this.shouldDisplayError()}>
           <div className="validation-error">
-            <span className="text">{this.props.errorText}</span>
+            <span className="error-text">{this.props.errorText}</span>
           </div>
         </OptionallyDisplayed>
       </div>

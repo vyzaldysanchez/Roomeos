@@ -31,7 +31,7 @@ const initialState = {
 };
 
 const fieldValidations = [
-  ruleRunner("name", "Room Name", required, minLength(3)),
+  ruleRunner("name", "Room name", required, minLength(3)),
 ];
 
 class NewRoom extends Component {
