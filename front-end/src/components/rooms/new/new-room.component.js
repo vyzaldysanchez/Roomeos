@@ -24,7 +24,7 @@ const initialState = {
   newRoom: Map(initialRoomState),
   isPrivate: false,
   suggestions: ["friends", "classmates", "college", "university"],
-  tags: [{id: 1, text: "friends"}],
+  tags: [],
   finishCreating: false,
   showErrors: false,
   validationErrors: {},
