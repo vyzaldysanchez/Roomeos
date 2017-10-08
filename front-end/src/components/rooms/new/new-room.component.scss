@@ -35,8 +35,12 @@
   border-top: 4px solid $success-text-header-color;
   padding-bottom: 20px;
 
-  h3 {
+  h3.resume-panel-title {
     color: $success-text-header-color;
+
+    strong {
+      color: darken($success-text-header-color, 10%);
+    }
   }
 }
 

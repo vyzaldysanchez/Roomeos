@@ -76,7 +76,7 @@ class NewRoom extends Component {
 
     return (
       <div className="resume-panel col-md-6 col-md-offset-3">
-        <h3>Congrats!, you just created a new room called <strong>{newRoom.get("name")}</strong></h3>
+        <h3 className="resume-panel-title">Congrats!, you just created a new room called <strong>"{newRoom.get("name")}"</strong></h3>
         <div className="col-md-12 m-top clearfix">
           <div className="col-md-6 col-sm-6 col-xs-6">
             <Link to={`/rooms/${newRoom.get("_id")}`} className="btn btn-success btn-block">Join chat</Link>
