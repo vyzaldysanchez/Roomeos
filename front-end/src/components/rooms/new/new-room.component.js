@@ -28,6 +28,7 @@ const initialState = {
   finishCreating: false,
   showErrors: false,
   validationErrors: {},
+  submitDisabled: false
 };
 
 const fieldValidations = [
@@ -76,7 +77,8 @@ class NewRoom extends Component {
 
     return (
       <div className="resume-panel col-md-6 col-md-offset-3">
-        <h3 className="resume-panel-title">Congrats!, you just created a new room called <strong>"{newRoom.get("name")}"</strong></h3>
+        <h3 className="resume-panel-title">Congrats!, you just created a new room called
+          <strong>"{newRoom.get("name")}"</strong></h3>
         <div className="col-md-12 m-top clearfix">
           <div className="col-md-6 col-sm-6 col-xs-6">
             <Link to={`/rooms/${newRoom.get("_id")}`} className="btn btn-success btn-block">Join chat</Link>
@@ -145,7 +147,9 @@ class NewRoom extends Component {
             </div>
             <div className="col-md-6 col-sm-6">
               <div className="form-group">
-                <button className="btn btn-primary btn-block" type="submit">That's it, create</button>
+                <button className="btn btn-primary btn-block" type="submit" disabled={this.state.submitDisabled}>That's
+                  it, create
+                </button>
               </div>
             </div>
           </div>
@@ -174,6 +178,10 @@ class NewRoom extends Component {
   handleSubmit(event: Event) {
     event.preventDefault();
 
+    if (this.state.submitDisabled) {
+      return;
+    }
+
     const newRoom: ChatRoom = this.state.newRoom.merge({
       visibility: this.getVisibility(),
       tags: this.getTags(),
@@ -181,8 +189,9 @@ class NewRoom extends Component {
     }).toObject();
 
     if (Object.keys(this.state.validationErrors).length === 0) {
+      this.setState({submitDisabled: true});
       this.props.dispatch(addRoom(newRoom)).then(({createdRoom}) => {
-        this.setState({newRoom: Map(createdRoom), finishCreating: true});
+        this.setState({newRoom: Map(createdRoom), finishCreating: true, submitDisabled: false});
       });
     }
     else {
