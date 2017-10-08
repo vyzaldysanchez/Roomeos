@@ -8,7 +8,7 @@ import type { ChatRoom } from "../../../models/chat-room";
 import { addRoom } from "../../../redux";
 import { User } from "../../../models/user";
 import { Link } from "react-router-dom";
-import { minLength, maxLength, required, ruleRunner, run, TextField, TextArea } from "../../validations";
+import { maxLength, minLength, required, ruleRunner, run, TextArea, TextField } from "../../validations";
 import "./new-room.component.scss";
 
 const tagsMessage = "Add keywords that help other people find your room";
@@ -52,6 +52,11 @@ class NewRoom extends Component {
 
   componentWillMount() {
     this.setState({validationErrors: run(this.state.newRoom, fieldValidations)});
+    document.body.classList.add("ac-background");
+  }
+
+  componentWillUnmount() {
+    document.body.classList.remove("ac-background");
   }
 
   errorFor(field) {
