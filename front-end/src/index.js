@@ -12,7 +12,7 @@ import Guard from "./components/guard/guard.component";
 const composeEnhanced = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(combineReducers(reducers), composeEnhanced(applyMiddleware(thunk)));
 
-loadComponent("discoverRooms", <MyRooms/>, store);
+loadComponent("myRooms", <MyRooms/>, store);
 
 function loadComponent(componentName, componentInstance, store, guarded = true) {
   const componentEl = document.getElementById(componentName);
