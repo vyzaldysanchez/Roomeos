@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { RoomCard } from "../card/room-card.component";
 import "./rooms-list.component.scss";
 import { User } from "../../../models";
+import type { ChatRoom } from "../../../models/chat-room";
 
 export class RoomsList extends Component {
 
@@ -20,10 +21,12 @@ export class RoomsList extends Component {
           <h3>{this.props.title}</h3>
         </div>
         <div className="row">
-          {this.props.rooms.map((room, index) => {
+          {this.props.rooms.map((room: ChatRoom, index) => {
             return room ? (
               <div key={index} className="rooms-list-col col-md-3">
-                <RoomCard user={this.props.user} room={room}/>
+                <a href={`/rooms/${room._id}`}>
+                  <RoomCard user={this.props.user} room={room}/>
+                </a>
               </div>
             ) : null
           })}
