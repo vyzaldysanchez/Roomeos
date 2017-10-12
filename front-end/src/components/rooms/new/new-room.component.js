@@ -32,7 +32,7 @@ const initialState = {
 };
 
 const fieldValidations = [
-  ruleRunner("name", "Room name", required, minLength(3)),
+  ruleRunner("name", "Room name", required, minLength(3), maxLength(75)),
   ruleRunner("description", "Room description", maxLength(140)),
 ];
 
