@@ -123,10 +123,27 @@ app.post("/account/delete", passportConfig.isAuthenticated, UserController.postD
 app.get("/account/unlink/:provider", passportConfig.isAuthenticated, UserController.getOauthUnlink);
 
 app.get("/rooms/discover", passportConfig.isAuthenticated, RoomsController.discoverRooms);
+app.get("/rooms/:id", passportConfig.isAuthenticated, RoomsController.getChatRoom);
 app.get(["/rooms", "/rooms/*"], passportConfig.isAuthenticated, RoomsController.getMyRooms);
 
 app.use("/auth", AuthProvidersRouter);
 
 app.use("/api", ApiRouter);
+
+app.use(function (req, res, next) {
+  res.status(404);
+
+  res.format({
+    html: function () {
+      res.render("errors/404", {url: req.url});
+    },
+    json: function () {
+      res.json({error: "Not found"});
+    },
+    default: function () {
+      res.type("txt").send("Not found");
+    }
+  });
+});
 
 module.exports = app;
