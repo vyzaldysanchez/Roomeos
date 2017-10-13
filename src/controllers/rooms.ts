@@ -23,7 +23,6 @@ export let discoverRooms = (req: Request, res: Response) => {
 
 /**
  * GET /rooms/:id
- * Home page.
  */
 export let getChatRoom = (req: Request, res: Response) => {
   const roomId = req.params.id;
