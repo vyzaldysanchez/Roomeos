@@ -1,4 +1,4 @@
-export type Chatter = {
+export type ChatterDTO = {
   _id: string,
   name: string,
   email: string,
