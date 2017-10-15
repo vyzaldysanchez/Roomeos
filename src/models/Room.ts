@@ -1,6 +1,7 @@
 import { UserModel } from "./User";
 import { Document, model, Schema } from "mongoose";
 import { RoomMessageModel } from "./RoomMessage";
+import "./RoomMessage";
 
 export const MAX_NUMBER_OF_CHATTERS = 250;
 
