@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { User } from "../../models";
-import "./guard.component.scss";
 import { connect } from "react-redux";
+import { Loading } from "../index";
 
 class Guard extends Component {
 
@@ -13,12 +13,7 @@ class Guard extends Component {
 
   render() {
     if (!this.props.user) {
-      return (
-        <div className="guard">
-          <i className="fa fa-spinner fa-spin fa-3x fa-fw"></i>
-          <h2 className="sr-only">Loading...</h2>
-        </div>
-      )
+      return <Loading/>
     }
 
     return (
