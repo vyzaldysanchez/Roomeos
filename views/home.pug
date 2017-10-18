@@ -4,28 +4,29 @@ block meta
   meta(name='viewport', content='width=device-width, initial-scale=1.0')
 
 block content
-  .jumbotron
-    h1.text-center Welcome to Roomeos!
-    p.lead Make friends 😄 with people nearby you #[strong (or not so near)], whether is someone from your #[strong neighborhood] or from the other side of the #[strong world] just find a chat room and make lots of new friends 😎
-    p.text-center
-      a.btn.btn-lg.btn-success(href='/signup', role='button') Sign up
-block content-fluid
-  .row
-    .col-sm-6.left-container
-      .left-side
-        .content-sided
-          h3 Meet new people
-          img.img-responsive.img-thumbnail.img-sided(src='/images/landing/clarisse-meyer-153935.jpg')
-    .col-sm-6.right-container
-      .right-side
-        .content-sided
-          .content-with-description.clear-fix
-            p.landing-content-description Have interesting and funny conversations with different kinds of people
-            img.img-responsive.img-thumbnail.img-sided(src='/images/landing/david-200088.jpg')
-          .content-with-description.clear-fix
-            img.img-responsive.img-thumbnail.img-sided(src='/images/landing/brooke-cagle-39570.jpg')
-            p.landing-content-description Things are much more better with friends, ask them to #[strong join!]
-  .row.bottom-container
-    .col-sm-12.no-padding
-      .big-landing-description
-        h3 Find a cool chat room today and make some new friends.
+  .container
+    .jumbotron
+      h1.text-center Welcome to Roomeos!
+      p.lead Make friends 😄 with people nearby you #[strong (or not so near)], whether is someone from your #[strong neighborhood] or from the other side of the #[strong world] just find a chat room and make lots of new friends 😎
+      p.text-center
+        a.btn.btn-lg.btn-success(href='/signup', role='button') Sign up
+  .container-fluid
+    .row
+      .col-sm-6.left-container
+        .left-side
+          .content-sided
+            h3 Meet new people
+            img.img-responsive.img-thumbnail.img-sided(src='/images/landing/clarisse-meyer-153935.jpg')
+      .col-sm-6.right-container
+        .right-side
+          .content-sided
+            .content-with-description.clear-fix
+              p.landing-content-description Have interesting and funny conversations with different kinds of people
+              img.img-responsive.img-thumbnail.img-sided(src='/images/landing/david-200088.jpg')
+            .content-with-description.clear-fix
+              img.img-responsive.img-thumbnail.img-sided(src='/images/landing/brooke-cagle-39570.jpg')
+              p.landing-content-description Things are much more better with friends, ask them to #[strong join!]
+    .row.bottom-container
+      .col-sm-12.no-padding
+        .big-landing-description
+          h3 Find a cool chat room today and make some new friends.
