@@ -32,7 +32,8 @@ export let getChatRoom = (req: Request, res: Response) => {
       return;
     }
     res.render("rooms/chat", {
-      title: room.name
+      title: room.name,
+      hideFooter: true
     });
   });
 };
