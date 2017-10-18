@@ -7,14 +7,24 @@
 // Scaffolding
 // -------------------------
 
+a, a:visited, a:hover, a:active {
+  text-decoration: none;
+  color: #fff;
+}
+
 html {
   position: relative;
   min-height: 100%;
+
+  &.full-page {
+    height: 100%;
+  }
 }
 
 body {
   padding-top: 60px;
   margin-bottom: 75px;
+  height: 100%;
 }
 
 footer {
@@ -26,6 +36,11 @@ footer {
 
   p, ul {
     margin-bottom: 0;
+  }
+
+  a, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: $brand-primary;
   }
 }
 
@@ -74,4 +89,9 @@ textarea {
 
 .mt100 {
   margin-top: 100px;
+}
+
+.container-full {
+  height: 100%;
+  width: 100%;
 }
