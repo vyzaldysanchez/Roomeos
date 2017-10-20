@@ -13,6 +13,7 @@ export let postCreateRoom = (req: Request, res: Response) => {
 
   Object.assign(newRoom, requestBody);
 
+  newRoom.registerChatters = [newRoom.createdBy];
   newRoom.save().then(doc => {
     responseRender.render({
       _id: doc.id,
