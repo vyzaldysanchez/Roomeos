@@ -30,3 +30,17 @@ export async function loadMyRooms(userId: String): Promise<List<ChatRoom>> {
     return Promise.reject(error);
   }
 }
+
+export async function getRoomById(roomId: String): Promise<ChatRoom> {
+  try {
+    const response = await fetch(API_ROOT + `/rooms/${roomId}`, {
+      headers: {...DEFAULT_HEADERS, ...getAuthorizationHeader()},
+      method: "GET"
+    });
+    const room = await response.json();
+    return Promise.resolve(room);
+  }
+  catch (error) {
+    return Promise.reject(error);
+  }
+}
