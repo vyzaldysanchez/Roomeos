@@ -62,7 +62,7 @@ export let postLogin = (req: Request, res: Response, next: NextFunction) => {
 export let logout = (req: Request, res: Response) => {
   req.logout();
   res.clearCookie("jwt");
-  res.redirect("/");
+  clearClientSessionAndRedirect(res);
 };
 
 /**
@@ -112,12 +112,19 @@ export let postSignup = (req: Request, res: Response, next: NextFunction) => {
       if (err) {
         return next(err);
       }
-      req.logIn(user, (err) => {
+
+      passport.authenticate("local", (err: Error, user: UserModel, info: LocalStrategyInfo) => {
         if (err) {
           return next(err);
         }
-        res.redirect("/");
-      });
+        req.logIn(user, (err) => {
+          if (err) {
+            return next(err);
+          }
+          res.cookie("jwt", user.jwtToken, {expires: false});
+          res.redirect("/");
+        });
+      })(req, res, next);
     });
   });
 };
@@ -211,7 +218,7 @@ export let postDeleteAccount = (req: Request, res: Response, next: NextFunction)
     }
     req.logout();
     req.flash("info", {msg: "Your account has been deleted."});
-    res.redirect("/");
+    clearClientSessionAndRedirect(res);
   });
 };
 
@@ -409,4 +416,13 @@ export let postForgot = (req: Request, res: Response, next: NextFunction) => {
     }
     res.redirect("/forgot");
   });
+};
+
+const clearClientSessionAndRedirect = (res: Response) => {
+  res.send(`
+    <script>
+    sessionStorage.clear();
+    window.location.replace("/");
+    </script>
+  `);
 };
