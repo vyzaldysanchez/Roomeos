@@ -16,10 +16,13 @@ export function loadAccountInfo(): Function {
       getAccountPromise = Promise.resolve(JSON.parse(sessionStorage.user));
     }
     else {
-      getAccountPromise = accountService.getAccountInfo()
-        .then(user => {
-          sessionStorage.user = JSON.stringify(user);
-        });
+      getAccountPromise = new Promise((resolve) => {
+        accountService.getAccountInfo()
+          .then(user => {
+            sessionStorage.user = JSON.stringify(user);
+            resolve(user);
+          });
+      });
     }
 
     return getAccountPromise
