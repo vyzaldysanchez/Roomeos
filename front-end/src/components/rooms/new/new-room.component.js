@@ -81,7 +81,7 @@ class NewRoom extends Component {
           <strong>"{newRoom.get("name")}"</strong></h3>
         <div className="col-md-12 m-top clearfix">
           <div className="col-md-6 col-sm-6 col-xs-6">
-            <Link to={`/rooms/${newRoom.get("_id")}`} className="btn btn-success btn-block">Join chat</Link>
+            <a href={`/rooms/${newRoom.get("_id")}`} className="btn btn-success btn-block">Join chat</a>
           </div>
           <div className="col-md-6 col-sm-6 col-xs-6">
             <Link to="/rooms" className="btn btn-primary btn-block">Go to my rooms</Link>
